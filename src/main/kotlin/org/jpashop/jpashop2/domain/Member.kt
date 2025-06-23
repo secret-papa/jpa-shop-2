@@ -11,6 +11,6 @@ class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
-    var id: Long? = null,
-    var name: String,
+    val id: Long? = null,
+    val name: String,
 )
