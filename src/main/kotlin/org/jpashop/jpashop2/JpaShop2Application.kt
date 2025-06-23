@@ -1,0 +1,11 @@
+package org.jpashop.jpashop2
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+
+@SpringBootApplication
+class JpaShop2Application
+
+fun main(args: Array<String>) {
+    runApplication<JpaShop2Application>(*args)
+}
