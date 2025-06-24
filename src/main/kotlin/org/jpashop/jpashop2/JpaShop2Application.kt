@@ -9,6 +9,4 @@ class JpaShop2Application
 
 fun main(args: Array<String>) {
     runApplication<JpaShop2Application>(*args)
-
-    val member: Member = Member(name = "lee");
 }
