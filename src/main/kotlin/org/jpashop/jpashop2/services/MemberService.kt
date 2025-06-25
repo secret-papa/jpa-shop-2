@@ -9,8 +9,12 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class MemberService(
-    val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository
 ) {
+    fun findMember(memberId: Long): Member {
+        return memberRepository.findMember(memberId)
+    }
+
     @Transactional
     fun createMember(command: CreateMemberCommand): Long? {
         val member = Member(name = command.name, address = command.address)

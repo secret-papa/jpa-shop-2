@@ -8,7 +8,7 @@ class Category(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CATEGORY_ID")
-    val id: Long,
+    val id: Long? = null,
     val name: String,
     @ManyToMany
     @JoinTable(

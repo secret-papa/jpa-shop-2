@@ -6,8 +6,12 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class MemberRepositoryImp (
-    val em: EntityManager
+    private val em: EntityManager
 ): MemberRepository {
+    override fun findMember(id: Long): Member {
+        return em.find(Member::class.java, id)
+    }
+
     override fun createMember(member: Member): Long? {
         em.persist(member)
         return member.id
