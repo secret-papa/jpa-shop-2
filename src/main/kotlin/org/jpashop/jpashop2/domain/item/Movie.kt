@@ -11,7 +11,7 @@ class Movie(
     name: String,
     price: Int,
     stockQuantity: Int,
-    categories: List<Category>,
+    categories: List<Category> = emptyList(),
     val director: String? = null,
     val actor: String? = null,
 ): Item(

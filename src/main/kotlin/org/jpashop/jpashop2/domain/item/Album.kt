@@ -11,7 +11,7 @@ class Album(
     name: String,
     price: Int,
     stockQuantity: Int,
-    categories: List<Category>,
+    categories: List<Category> = emptyList(),
     val artist: String? = null,
     val etc: String? = null,
 ): Item(

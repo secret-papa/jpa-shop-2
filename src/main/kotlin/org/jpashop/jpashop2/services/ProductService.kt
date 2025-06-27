@@ -24,13 +24,13 @@ class ProductService(
             categoryRepository.findById(id) ?: throw IllegalArgumentException("No category with id $id")
         }
 
-        var item: Item
+
+        val item: Item
         if (command.dType == DType.ALBUM) {
             item = Album(
                 name = command.name,
                 price = command.price,
                 stockQuantity = command.stockQuantity,
-                categories = categories,
                 artist = command.artist,
                 etc = command.etc
             )
@@ -39,7 +39,6 @@ class ProductService(
                 name = command.name,
                 price = command.price,
                 stockQuantity = command.stockQuantity,
-                categories = categories,
                 author = command.author,
                 isBn = command.isbn,
             )
@@ -48,11 +47,12 @@ class ProductService(
                 name = command.name,
                 price = command.price,
                 stockQuantity = command.stockQuantity,
-                categories = categories,
                 director = command.director,
                 actor = command.actor
             )
         }
+
+        categories.forEach { category -> category.addItem(item) }
 
         return productRepository.create(item)
     }

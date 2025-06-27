@@ -11,7 +11,7 @@ class Book(
     name: String,
     price: Int,
     stockQuantity: Int,
-    categories: List<Category>,
+    categories: List<Category> = emptyList(),
     val author: String? = null,
     val isBn: String? = null,
 ): Item(

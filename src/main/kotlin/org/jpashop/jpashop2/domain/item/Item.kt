@@ -14,7 +14,7 @@ open class Item(
     var name: String,
     var price: Int,
     var stockQuantity: Int,
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "items")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "items")
     var categories: List<Category> = emptyList(),
 ) {
 
