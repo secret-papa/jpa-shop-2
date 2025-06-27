@@ -7,13 +7,13 @@ import org.jpashop.jpashop2.domain.Category
 @Entity
 @DiscriminatorValue("MOVIE")
 class Movie(
-    id: Long,
+    id: Long? = null,
     name: String,
     price: Int,
     stockQuantity: Int,
     categories: List<Category>,
-    val director: String,
-    val actor: String,
+    val director: String? = null,
+    val actor: String? = null,
 ): Item(
     id = id,
     name = name,

@@ -10,7 +10,7 @@ open class Item(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ITEM_ID")
-    val id: Long,
+    val id: Long? = null,
     val name: String,
     val price: Int,
     val stockQuantity: Int,

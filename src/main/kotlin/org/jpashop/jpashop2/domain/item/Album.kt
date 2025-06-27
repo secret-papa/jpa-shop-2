@@ -7,13 +7,13 @@ import org.jpashop.jpashop2.domain.Category
 @Entity
 @DiscriminatorValue("ALBUM")
 class Album(
-    id: Long,
+    id: Long? = null,
     name: String,
     price: Int,
     stockQuantity: Int,
     categories: List<Category>,
-    val artist: String,
-    val etc: String
+    val artist: String? = null,
+    val etc: String? = null,
 ): Item(
     id = id,
     name = name,

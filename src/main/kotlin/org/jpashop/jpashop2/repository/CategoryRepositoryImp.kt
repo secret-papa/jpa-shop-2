@@ -12,4 +12,8 @@ class CategoryRepositoryImp(
         em.persist(category)
         return category.id
     }
+
+    override fun findById(id: Long): Category? {
+        return em.find(Category::class.java, id)
+    }
 }
