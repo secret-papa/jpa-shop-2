@@ -8,6 +8,7 @@ import org.jpashop.jpashop2.repository.CategoryRepository
 import org.jpashop.jpashop2.repository.ProductRepository
 import org.jpashop.jpashop2.services.command.CreateProductCommand
 import org.jpashop.jpashop2.services.command.DType
+import org.jpashop.jpashop2.services.command.UpdateProductCommand
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -54,5 +55,23 @@ class ProductService(
         }
 
         return productRepository.create(item)
+    }
+
+    @Transactional
+    fun update(command: UpdateProductCommand): Item {
+        val product = productRepository.findById(command.id) ?: throw IllegalArgumentException("No product with id ${command.id}")
+
+        val categories = command.categories?.map { id ->
+            categoryRepository.findById(id) ?: throw IllegalArgumentException("No category with id $id")
+        }
+
+        product.update(
+            name = command.name,
+            price = command.price,
+            stockQuantity = command.stockQuantity,
+            categories = categories
+        )
+
+        return product
     }
 }

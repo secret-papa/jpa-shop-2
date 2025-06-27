@@ -11,10 +11,22 @@ open class Item(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ITEM_ID")
     val id: Long? = null,
-    val name: String,
-    val price: Int,
-    val stockQuantity: Int,
+    var name: String,
+    var price: Int,
+    var stockQuantity: Int,
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "items")
-    val categories: List<Category> = emptyList(),
+    var categories: List<Category> = emptyList(),
 ) {
+
+    fun update(
+        name: String? = null,
+        price: Int? = null,
+        stockQuantity: Int? = null,
+        categories: List<Category>? = null,
+    ) {
+        name?.let { this.name = it }
+        price?.let { this.price = it }
+        stockQuantity?.let { this.stockQuantity = it }
+        categories?.let { this.categories = it }
+    }
 }
