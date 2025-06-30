@@ -74,4 +74,8 @@ class ProductService(
 
         return product
     }
+
+    fun findAll(): List<Item> {
+       return productRepository.findAll()
+    }
 }

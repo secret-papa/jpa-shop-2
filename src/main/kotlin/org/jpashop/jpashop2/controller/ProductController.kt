@@ -26,4 +26,9 @@ class ProductController(
 
         return ResponseEntity.ok(item.toDto())
     }
+
+    @GetMapping
+    fun findAll(): ResponseEntity<List<ItemDto>> {
+        return ResponseEntity.ok(productService.findAll().map { it.toDto() })
+    }
 }
