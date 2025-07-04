@@ -4,6 +4,6 @@ import org.jpashop.jpashop2.domain.item.Item
 
 interface ProductRepository {
     fun create(product: Item): Long?
-    fun findById(id: Long): Item?
+    fun findById(id: Long): Item
     fun findAll(): List<Item>
 }

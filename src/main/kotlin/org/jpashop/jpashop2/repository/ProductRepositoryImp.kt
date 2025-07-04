@@ -13,7 +13,7 @@ class ProductRepositoryImp(
         return product.id
     }
 
-    override fun findById(id: Long): Item? {
+    override fun findById(id: Long): Item {
         return em.find(Item::class.java, id)
     }
 

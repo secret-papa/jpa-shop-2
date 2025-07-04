@@ -9,17 +9,26 @@ class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
-    val id: Long,
+    val id: Long? = null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     val member: Member,
-    @OneToMany(mappedBy = "order")
-    val orderItems: List<OrderItem> = emptyList(),
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
+    var orderItems: List<OrderItem> = emptyList(),
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "DELIVERY_ID")
-    val delivery: Delivery,
-    val orderDate: LocalDateTime,
+    var delivery: Delivery? = null,
+    val orderDate: LocalDateTime = LocalDateTime.now(),
     @Enumerated(EnumType.STRING)
     val status: OrderStatus
 ) {
+    fun addOrderItems(orderItems: List<OrderItem>) {
+        this. orderItems = orderItems
+        orderItems.forEach { it.addOrder(this) }
+    }
+
+    fun addDelivery(delivery: Delivery) {
+        this.delivery = delivery
+        delivery.order = this
+    }
 }
