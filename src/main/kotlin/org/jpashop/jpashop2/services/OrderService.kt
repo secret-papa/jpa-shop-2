@@ -15,6 +15,10 @@ class OrderService(
     private val memberRepository: MemberRepository,
     private val orderRepository: OrderRepository
 ) {
+    fun findAll(memberId: Long): List<Order> {
+        return orderRepository.findAll(memberId)
+    }
+
     @Transactional
     fun create(command: CreateOrderCommand): Long? {
         val member = memberRepository.findMember(command.memberId)

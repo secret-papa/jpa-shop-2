@@ -13,4 +13,13 @@ class OrderRepositoryImp(
 
         return order.id
     }
+
+    override fun findAll(memberId: Long): List<Order> {
+        return em.createQuery(
+            "select o from Order o where member.id = :memberId",
+            Order::class.java
+        )
+            .setParameter("memberId", memberId)
+            .resultList
+    }
 }
