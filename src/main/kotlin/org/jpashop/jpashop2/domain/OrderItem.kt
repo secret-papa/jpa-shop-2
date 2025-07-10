@@ -21,10 +21,15 @@ class OrderItem(
     fun addOrder(order: Order) {
         this.order = order
         val restStockQuantity = item.stockQuantity - count
+
         if (restStockQuantity < 0) {
             throw IllegalArgumentException("item sold out")
         }
 
         item.stockQuantity = restStockQuantity
+    }
+
+    fun resetItemStockQuantity() {
+        item.stockQuantity = item.stockQuantity + count
     }
 }

@@ -24,4 +24,11 @@ class OrderController(
         val order = orderService.create(request.toCommand())
         return ResponseEntity.ok(order)
     }
+
+    @PutMapping("/{orderId}/cancel")
+    fun cancelOrder(@PathVariable orderId: Long): ResponseEntity<String> {
+        orderService.cancel(orderId)
+
+        return ResponseEntity.ok("cancel success")
+    }
 }

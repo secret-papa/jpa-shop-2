@@ -20,7 +20,7 @@ class Order(
     var delivery: Delivery? = null,
     val orderDate: LocalDateTime = LocalDateTime.now(),
     @Enumerated(EnumType.STRING)
-    val status: OrderStatus
+    var status: OrderStatus
 ) {
     fun addOrderItems(orderItems: List<OrderItem>) {
         this. orderItems = orderItems
@@ -30,5 +30,14 @@ class Order(
     fun addDelivery(delivery: Delivery) {
         this.delivery = delivery
         delivery.order = this
+    }
+
+    fun cancel() {
+        if (status == OrderStatus.CANCEL)  {
+            throw IllegalStateException("Order order canceled")
+        }
+
+        status = OrderStatus.CANCEL
+        orderItems.forEach { it.resetItemStockQuantity() }
     }
 }

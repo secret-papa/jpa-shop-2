@@ -22,4 +22,8 @@ class OrderRepositoryImp(
             .setParameter("memberId", memberId)
             .resultList
     }
+
+    override fun findById(orderId: Long): Order {
+        return em.find(Order::class.java, orderId)
+    }
 }
