@@ -9,7 +9,7 @@ data class CreateMemberRequest(
 ) {
     fun toCommand(): CreateMemberCommand = CreateMemberCommand(
         name = name,
-        address = Address(
+        address = org.jpashop.jpashop2.services.dto.AddressDto(
             city = address.city,
             street = address.street,
             zipCode = address.zipCode

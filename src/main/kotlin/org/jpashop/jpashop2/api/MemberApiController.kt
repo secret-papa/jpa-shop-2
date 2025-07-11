@@ -6,7 +6,9 @@ import org.jpashop.jpashop2.domain.Member
 import org.jpashop.jpashop2.services.MemberService
 import org.jpashop.jpashop2.services.command.CreateMemberCommand
 import org.jpashop.jpashop2.services.dto.AddressDto
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -36,6 +38,17 @@ class MemberApiController(
         return CreateMemberResponse(id)
     }
 
+    @PutMapping("/api/v2/members/{id}")
+    fun updateMemberV2(
+        @PathVariable("id") id: Long,
+        @RequestBody @Valid request: UpdateMemberRequest
+    ): UpdateMemberResponse {
+        memberService.update(id, request.name)
+        val findMember = memberService.findMember(id)
+
+        return UpdateMemberResponse(findMember.id, findMember.name)
+    }
+
     data class CreateMemberRequest(
         @NotEmpty
         val name: String,
@@ -45,5 +58,14 @@ class MemberApiController(
 
     data class CreateMemberResponse(
         val id: Long?
+    )
+
+    data class UpdateMemberRequest(
+        val name: String
+    )
+
+    data class UpdateMemberResponse(
+        val id: Long?,
+        val name: String
     )
 }
