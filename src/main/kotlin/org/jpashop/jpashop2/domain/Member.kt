@@ -9,7 +9,6 @@ class Member(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     val id: Long? = null,
-    @NotEmpty
     val name: String,
     @Embedded
     val address: Address,
