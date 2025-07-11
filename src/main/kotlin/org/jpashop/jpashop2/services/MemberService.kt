@@ -1,5 +1,6 @@
 package org.jpashop.jpashop2.services
 
+import org.jpashop.jpashop2.domain.Address
 import org.jpashop.jpashop2.domain.Member
 import org.jpashop.jpashop2.repository.MemberRepository
 import org.jpashop.jpashop2.services.command.CreateMemberCommand
@@ -17,7 +18,19 @@ class MemberService(
 
     @Transactional
     fun createMember(command: CreateMemberCommand): Long? {
-        val member = Member(name = command.name, address = command.address)
+        val member = Member(
+            name = command.name,
+            address = Address(
+                street = command.address.street,
+                city = command.address.city,
+                zipCode = command.address.zipCode
+            ))
         return memberRepository.createMember(member)
+    }
+
+    @Transactional
+    fun update(id: Long, name: String) {
+        val member = memberRepository.findMember(id)
+        member.name = name
     }
 }
