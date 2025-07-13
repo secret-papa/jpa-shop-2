@@ -6,16 +6,21 @@ import org.jpashop.jpashop2.domain.Member
 import org.jpashop.jpashop2.services.MemberService
 import org.jpashop.jpashop2.services.command.CreateMemberCommand
 import org.jpashop.jpashop2.services.dto.AddressDto
+import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class MemberApiController(
-    private val memberService: MemberService
+    private val memberService: MemberService,
+    private val stringHttpMessageConverter: StringHttpMessageConverter
 ) {
 
     @GetMapping("/api/v1/members")
-    fun membersV1(): List<Member> {
-        return memberService.findAll()
+    fun membersV2(): Result<List<MemberDto>> {
+        val findMembers = memberService.findAll()
+        val collect = findMembers.map { m -> MemberDto(m.name) }
+
+        return Result(collect)
     }
 
     @PostMapping("/api/v1/members")
@@ -49,6 +54,14 @@ class MemberApiController(
 
         return UpdateMemberResponse(findMember.id, findMember.name)
     }
+
+    data class Result<T>(
+        val data: T,
+    )
+
+    data class MemberDto(
+        val name: String,
+    )
 
     data class CreateMemberRequest(
         @NotEmpty
