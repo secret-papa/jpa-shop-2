@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository
 class MemberRepositoryImp (
     private val em: EntityManager
 ): MemberRepository {
+    override fun findAll(): List<Member> {
+        return em.createQuery("select m from Member m", Member::class.java).resultList
+    }
+
     override fun findMember(id: Long): Member {
         return em.find(Member::class.java, id)
     }

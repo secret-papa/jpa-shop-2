@@ -6,16 +6,17 @@ import org.jpashop.jpashop2.domain.Member
 import org.jpashop.jpashop2.services.MemberService
 import org.jpashop.jpashop2.services.command.CreateMemberCommand
 import org.jpashop.jpashop2.services.dto.AddressDto
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class MemberApiController(
     private val memberService: MemberService
 ) {
+
+    @GetMapping("/api/v1/members")
+    fun membersV1(): List<Member> {
+        return memberService.findAll()
+    }
 
     @PostMapping("/api/v1/members")
     fun saveMemberV1(@RequestBody @Valid member: Member): CreateMemberResponse {

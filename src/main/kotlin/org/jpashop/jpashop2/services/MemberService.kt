@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional
 class MemberService(
     private val memberRepository: MemberRepository
 ) {
+    fun findAll(): List<Member> {
+        return memberRepository.findAll()
+    }
     fun findMember(memberId: Long): Member {
         return memberRepository.findMember(memberId)
     }
