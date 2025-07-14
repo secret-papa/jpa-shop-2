@@ -1,5 +1,6 @@
 package org.jpashop.jpashop2.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.jpashop.jpashop2.domain.item.Item
 
@@ -12,6 +13,7 @@ class OrderItem(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     val item: Item,
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     var order: Order? = null,
