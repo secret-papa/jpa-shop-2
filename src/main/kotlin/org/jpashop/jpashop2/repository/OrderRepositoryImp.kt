@@ -26,4 +26,13 @@ class OrderRepositoryImp(
     override fun findById(orderId: Long): Order {
         return em.find(Order::class.java, orderId)
     }
+
+    override fun findAllWithMemberDelivery(): List<Order> {
+        return em.createQuery(
+            "select o from Order o" +
+            " join fetch o.member m" +
+            " join fetch o.delivery",
+            Order::class.java
+        ).resultList
+    }
 }
