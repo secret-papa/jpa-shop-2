@@ -4,13 +4,16 @@ import org.jpashop.jpashop2.domain.Address
 import org.jpashop.jpashop2.domain.Order
 import org.jpashop.jpashop2.domain.OrderStatus
 import org.jpashop.jpashop2.repository.OrderRepository
+import org.jpashop.jpashop2.repository.order.simplequery.OrderSimpleQueryDto
+import org.jpashop.jpashop2.repository.order.simplequery.OrderSimpleRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
 @RestController
 class OrderSimpleApiController(
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val orderSimpleRepository: OrderSimpleRepository
 ) {
 
     @GetMapping("/api/v1/simple-orders")
@@ -50,6 +53,11 @@ class OrderSimpleApiController(
         )}
 
         return results
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    fun ordersV4(): List<OrderSimpleQueryDto> {
+        return orderSimpleRepository.findOrderDtos()
     }
 
     data class SimpleOrderDto(
