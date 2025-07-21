@@ -8,4 +8,5 @@ interface OrderRepository {
     fun findById(orderId: Long): Order
     fun findAllWithMemberDelivery(): List<Order>
     fun findAllWithItem(): List<Order>
+    fun findAllWithMemberDeliveryWithPaging(offset: Int, limit: Int): List<Order>
 }

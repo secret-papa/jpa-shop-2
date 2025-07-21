@@ -1,6 +1,7 @@
 package org.jpashop.jpashop2.domain
 
 import jakarta.persistence.*
+import org.hibernate.annotations.BatchSize
 import java.time.LocalDateTime
 
 @Entity
@@ -13,6 +14,7 @@ class Order(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     val member: Member,
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
     var orderItems: List<OrderItem> = emptyList(),
     @OneToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
