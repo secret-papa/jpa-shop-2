@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
+// 성능 최적화
 @RestController
 class OrderApiController(
     private val orderRepository: OrderRepository,
