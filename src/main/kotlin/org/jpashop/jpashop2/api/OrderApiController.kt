@@ -69,6 +69,12 @@ class OrderApiController(
         return orderQueryRepository.findAllByDto_optimization()
     }
 
+    @GetMapping("/api/v6/orders")
+    fun ordersV6(
+    ): List<OrderQueryDto> {
+        return orderQueryRepository.findAllByDto_flat()  // OrderQueryDto로 변환하는 과정을 거쳐 반환한다
+    }
+
     data class OrderDto(
         val orderId: Long?,
         val name: String,
